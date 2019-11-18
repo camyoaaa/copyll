@@ -53,14 +53,20 @@ const routes = [{
                 component: resolve => require(["../modules/deploy/mainContent/moban"], resolve)
             },
             {
-                path: "tb/:taskType",
+                path: "tb",
                 name: "deploy_taobao",
                 component: resolve => require(["../modules/deploy/mainContent/taobao"], resolve),
                 children: [{
-                    path: "flow",
-                    name: "deploy_taobao_flow",
-                    component: resolve => require(["../modules/deploy/mainContent/taobao/flow"], resolve)
-                }, ]
+                        path: "flow",
+                        name: "deploy_taobao_flow",
+                        component: resolve => require(["../modules/deploy/mainContent/taobao/flow"], resolve)
+                    },
+                    {
+                        path: "favorite",
+                        name: "deploy_taobao_favorite",
+                        component: resolve => require(["../modules/deploy/mainContent/taobao/favorite"], resolve)
+                    },
+                ]
 
 
             },

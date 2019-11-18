@@ -4,14 +4,16 @@
             <!-- 任务表单开始 -->
             <div class="form-horizontal">
                 <form-item label="任务类型">
-                    <types-btn-group :buttons="flowTypes" v-model="form.taskType"></types-btn-group>
+                    <types-btn-group :buttons="taskTypes" v-model="form.taskType"></types-btn-group>
                     <form-tools></form-tools>
                 </form-item>
+                <div class="col-sm-9 col-sm-offset-2 pts" v-if="form.taskType == 'ju_favorite'"><b class="text-red">聚划算开团提醒只能发布和完成250个任务，不保证显示率</b> <a href="javascript:void(0);" class="text-orange" ng-click="showNotice();"><i class="fa fa-search"></i>点击查看详情</a>
+                </div>
                 <form-item label="任务日期">
                     <task-date-picker v-model="form.daterange"></task-date-picker>
                     <task-calc :task-duration="taskDuration" :task-daily="taskDaily"></task-calc>
                 </form-item>
-                <form-item label="商品链接">
+                <form-item :label="linkSearchLabel">
                     <link-search @queryback="
           result => {
             form.productInfo = result;
@@ -21,9 +23,8 @@
                         <product-show style="margin-top:10px" :data="form.productInfo" v-show="form.productInfo.title"></product-show>
                     </el-collapse-transition>
                 </form-item>
-                <keywords-form-item v-model="form.keywords" v-if="['app_flow','pc_flow'].includes(form.taskType)"></keywords-form-item>
-                <hr />
-                <double-form-item label1="浏览时间" label2="浏览深度">
+                <keywords-form-item v-model="form.keywords" v-if="form.taskType == 'search_favorite'"></keywords-form-item>
+                <double-form-item v-if="form.taskType == 'search_favorite'" label1="浏览时间" label2="浏览深度">
                     <common-select slot="item1" v-model="form.scanTime" :options="scanTimeOptions" :key="form.taskType"></common-select>
                     <scan-deep-select slot="item2" v-model="form.scanDeep"></scan-deep-select>
                 </double-form-item>
@@ -53,27 +54,27 @@ export default {
     name: "taobao",
     data() {
         return {
-            flowTypes: [
+            taskTypes: [
                 {
-                    label: "APP流量",
-                    value: "app_flow",
-                    icon: "lion-shouji1"
+                    label: "搜索收藏",
+                    value: "search_favorite"
                 },
                 {
-                    label: "PC流量",
-                    value: "pc_flow",
-                    icon: "lion-pc"
+                    label: "商品收藏",
+                    value: "product_favorite"
                 },
                 {
-                    label: "直访流量",
-                    value: "visit_flow",
-                    icon: "lion-lianjie"
+                    label: "店铺收藏",
+                    value: "shop_favorite"
+                },
+                {
+                    label: "商品点赞",
+                    value: "product_praise"
+                },
+                {
+                    label: "聚划算",
+                    value: "ju_favorite"
                 }
-                // {
-                // 	label: "投票",
-                // 	value: "visit_1212",
-                // 	icon:'lion-1212'
-                // }
             ],
             planTypes: [
                 { label: "自动当天完成", value: "autoToday" },
@@ -100,20 +101,29 @@ export default {
     },
     computed: {
         scanTimeOptions() {
-            if (this.form.taskType == "app_flow") {
-                return [
-                    { value: "30-100", label: "30-100秒(免费)" },
-                    { value: "100-180", label: "100-180秒(+8积分)" },
-                    { value: "180-280", label: "180-280秒(+13积分)" },
-                    { value: "280-380", label: "280-280秒(+18积分)" }
-                ];
-            } else {
-                return [
-                    { value: "30-50", label: "30-50秒(免费)" },
-                    { value: "50-90", label: "50-90秒(+5积分)" },
-                    { value: "90-130", label: "90-130秒(+10积分)" }
-                ];
+            return [
+                { value: "100-180", label: "100-180秒(免费)" },
+                { value: "180-280", label: "180-280秒(+5积分)" },
+                { value: "280-380", label: "280-280秒(+10积分)" }
+            ];
+        },
+        linkSearchLabel() {
+            if (
+                [
+                    "search_favorite",
+                    "product_favorite",
+                    "product_praise"
+                ].includes(this.taskType)
+            ) {
+                return "商品链接";
             }
+            if (this.taskType == "shop_favorite") {
+                return "店铺收藏";
+            }
+            if (this.taskType == "ju_favorite") {
+                return "聚划算";
+            }
+            return "";
         },
         taskDuration() {
             //任务时长

@@ -1,19 +1,23 @@
 <template>
   <div class="row">
-    <div class="col-sm-5 mbs">
-      <div class="input-group" ng-class="{&#39;input-group&#39;: !!showRank}">
-        <keywords-input v-model="keywords" size="small">
+    <div class="col-sm-5">
+      <div class="input-group">
+        <keywords-input
+          v-model="keywords"
+          size="small"
+          placeholder="请输入关键词"
+        >
           <el-button slot="append" icon="el-icon-search" @click="queryRank"
             >查排名</el-button
           >
         </keywords-input>
       </div>
     </div>
-    <div class="col-sm-7 mbs" style="position: static;">
+    <div class="col-sm-7">
       <div class="flex">
         <div class="flex-grow control-label text-ellipsis prl">数量</div>
         <div class="flex-static">
-          <div class="input-group input-group- ng-valid ng-valid-maxlength">
+          <div class="input-group">
             <tasknum-input
               v-model="taskNum"
               size="small"
@@ -22,18 +26,18 @@
           </div>
         </div>
         <div class="flex-static plm">
-          <el-button size="small">时段</el-button>
+          <el-button size="small" @click="togglePanel">时段</el-button>
         </div>
-        <div class="flex-static plm ng-hide" v-if="false">
+        <div class="flex-static plm" v-if="showRemoveButton">
           <kdd-tooltip content="移除关键词" placement="top">
-            <a class="btn btn-cricle btn-danger cursor-pointer">
+            <a class="btn btn-cricle btn-danger cursor-pointer" @click="remove">
               <i class="fa fa-minus"></i>
             </a>
           </kdd-tooltip>
         </div>
         <div class="flex-static plm">
           <kdd-tooltip content="复制添加" placement="top">
-            <a class="btn btn-cricle btn-success cursor-pointer">
+            <a class="btn btn-cricle btn-success cursor-pointer" @click="addk">
               <i class="fa fa-plus"></i>
             </a>
           </kdd-tooltip>
@@ -71,6 +75,12 @@ export default {
     tasknumInput: InputNumber,
     kddTooltip: Tooltip
   },
+  props: {
+    showRemoveButton: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       keywords: "",
@@ -86,6 +96,15 @@ export default {
       if (!isRealNum(val)) {
         this.taskNum = "";
       }
+    },
+    togglePanel() {
+      this.$emit("toggle");
+    },
+    remove() {
+      this.$emit("remove");
+    },
+    addk() {
+      this.$emit("add");
     }
   }
 };

@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div style="margin-top:10px">
     任务时长
-    <b class="font-georgia text-red text-lg">{{ timeLong }}</b>
+    <b class="font-georgia text-red text-lg">{{ taskDuration }}</b>
     天，每天发布
-    <b class="font-georgia text-red text-lg">{{ taskDayNum }}</b>
+    <b class="font-georgia text-red text-lg">{{ taskDaily }}</b>
     个任务量，此次合计发布
-    <b class="font-georgia text-red text-lg">{{ taskTotal }}</b>
+    <b class="font-georgia text-red text-lg">{{ taskDuration * taskDaily }}</b>
     个任务。
   </div>
 </template>
@@ -14,15 +14,11 @@
 export default {
   name: "taskCalc",
   props: {
-    timeLong: {
+    taskDuration: {
       type: Number,
       default: 0
     },
-    taskDayNum: {
-      type: Number,
-      default: 0
-    },
-    taskTotal: {
+    taskDaily: {
       type: Number,
       default: 0
     }
