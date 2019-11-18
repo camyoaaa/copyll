@@ -7,16 +7,12 @@
                     <types-btn-group :buttons="taskTypes" v-model="form.taskType"></types-btn-group>
                     <form-tools></form-tools>
                 </form-item>
-                <form-item v-if="form.taskType == 'ju_favorite'">
-                    <div class="pts"><b class="text-red">聚划算开团提醒只能发布和完成250个任务，不保证显示率</b> <a href="javascript:void(0);" class="text-orange" ng-click="showNotice();"><i class="fa fa-search"></i>点击查看详情</a>
-                    </div>
-                </form-item>
                 <form-item label="任务日期">
                     <task-date-picker v-model="form.daterange"></task-date-picker>
                     <task-calc :task-duration="taskDuration" :task-daily="taskDaily"></task-calc>
                 </form-item>
-                <form-item :label="linkSearchLabel">
-                    <link-search :placeholder="linkSearchPlaceholder" @queryback=" 
+                <form-item label="直播淘口令" v-if="this.form.taskType == 'live_cart'">
+                    <link-search @queryback="
           result => {
             form.productInfo = result;
           }
@@ -25,8 +21,19 @@
                         <product-show style="margin-top:10px" :data="form.productInfo" v-show="form.productInfo.title"></product-show>
                     </el-collapse-transition>
                 </form-item>
-                <keywords-form-item v-model="form.keywords" v-if="form.taskType == 'search_favorite'"></keywords-form-item>
-                <double-form-item v-if="form.taskType == 'search_favorite'" label1="浏览时间" label2="浏览深度">
+                <form-item label="商品链接">
+                    <link-search @queryback="
+          result => {
+            form.productInfo = result;
+          }
+        "></link-search>
+                    <el-collapse-transition>
+                        <product-show style="margin-top:10px" :data="form.productInfo" v-show="form.productInfo.title"></product-show>
+                    </el-collapse-transition>
+                </form-item>
+                <keywords-form-item v-model="form.keywords" v-if="form.taskType == 'search_cart'"></keywords-form-item>
+                <hr />
+                <double-form-item v-if="form.taskType == 'search_cart'" label1="浏览时间" label2="浏览深度">
                     <common-select slot="item1" v-model="form.scanTime" :options="scanTimeOptions" :key="form.taskType"></common-select>
                     <scan-deep-select slot="item2" v-model="form.scanDeep"></scan-deep-select>
                 </double-form-item>
@@ -58,24 +65,24 @@ export default {
         return {
             taskTypes: [
                 {
-                    label: "搜索收藏",
-                    value: "search_favorite"
+                    label: "搜索加购",
+                    value: "search_cart",
+                    icon: "lion-sousuo"
                 },
                 {
-                    label: "商品收藏",
-                    value: "product_favorite"
+                    label: "直接加购",
+                    value: "direct_cart",
+                    icon: "lion-gouwuche"
                 },
                 {
-                    label: "店铺收藏",
-                    value: "shop_favorite"
+                    label: "直播间加购",
+                    value: "live_cart",
+                    icon: "lion-zhibo"
                 },
                 {
-                    label: "商品点赞",
-                    value: "product_praise"
-                },
-                {
-                    label: "聚划算",
-                    value: "ju_favorite"
+                    label: "淘抢购",
+                    value: "tao_cart",
+                    icon: "lion-qiang"
                 }
             ],
             planTypes: [
@@ -104,46 +111,10 @@ export default {
     computed: {
         scanTimeOptions() {
             return [
-                { value: "100-180", label: "100-180秒(免费)" },
+                { value: "100-180", label: "100-180秒(+免费)" },
                 { value: "180-280", label: "180-280秒(+5积分)" },
                 { value: "280-380", label: "280-280秒(+10积分)" }
             ];
-        },
-        linkSearchLabel() {
-            if (
-                [
-                    "search_favorite",
-                    "product_favorite",
-                    "product_praise"
-                ].includes(this.form.taskType)
-            ) {
-                return "商品链接";
-            }
-            if (this.form.taskType == "shop_favorite") {
-                return "店铺链接";
-            }
-            if (this.form.taskType == "ju_favorite") {
-                return "聚划算";
-            }
-            return "";
-        },
-        linkSearchPlaceholder() {
-            if (
-                [
-                    "search_favorite",
-                    "product_favorite",
-                    "product_praise"
-                ].includes(this.form.taskType)
-            ) {
-                return "输入商品链接(或淘口令)";
-            }
-            if (this.form.taskType == "shop_favorite") {
-                return "输入店铺链接(淘宝/天猫/飞猪/极有家)";
-            }
-            if (this.form.taskType == "ju_favorite") {
-                return "输入聚划算链接";
-            }
-            return "";
         },
         taskDuration() {
             //任务时长

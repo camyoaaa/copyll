@@ -1,3 +1,4 @@
+
 <template>
     <div class="scroll-viewer">
         <div class="tab-content mbn task-content">
@@ -7,9 +8,9 @@
                     <types-btn-group :buttons="taskTypes" v-model="form.taskType"></types-btn-group>
                     <form-tools></form-tools>
                 </form-item>
-                <form-item v-if="form.taskType == 'ju_favorite'">
-                    <div class="pts"><b class="text-red">聚划算开团提醒只能发布和完成250个任务，不保证显示率</b> <a href="javascript:void(0);" class="text-orange" ng-click="showNotice();"><i class="fa fa-search"></i>点击查看详情</a>
-                    </div>
+                <form-item v-if="form.taskType == 'live_hot'">
+                    <div class="pts"><b class="text-red">直播热度到账率100%，最多发布100万热度！</div>
+
                 </form-item>
                 <form-item label="任务日期">
                     <task-date-picker v-model="form.daterange"></task-date-picker>
@@ -58,24 +59,24 @@ export default {
         return {
             taskTypes: [
                 {
-                    label: "搜索收藏",
-                    value: "search_favorite"
+                    label: "直播热度",
+                    value: "live_hot",
+                    icon: "lion-fire"
                 },
                 {
-                    label: "商品收藏",
-                    value: "product_favorite"
+                    label: "达人关注",
+                    value: "daren_care",
+                    icon: "lion-zhibo"
                 },
                 {
-                    label: "店铺收藏",
-                    value: "shop_favorite"
+                    label: "直播观看",
+                    value: "live_watch",
+                    icon: "lion-guankan"
                 },
                 {
-                    label: "商品点赞",
-                    value: "product_praise"
-                },
-                {
-                    label: "聚划算",
-                    value: "ju_favorite"
+                    label: "微淘点赞",
+                    value: "tao_dianzan",
+                    icon: "lion-dianzan"
                 }
             ],
             planTypes: [
@@ -110,20 +111,14 @@ export default {
             ];
         },
         linkSearchLabel() {
-            if (
-                [
-                    "search_favorite",
-                    "product_favorite",
-                    "product_praise"
-                ].includes(this.form.taskType)
-            ) {
-                return "商品链接";
+            if (["live_hot", "live_watch"].includes(this.form.taskType)) {
+                return "直播口令";
             }
-            if (this.form.taskType == "shop_favorite") {
-                return "店铺链接";
+            if (this.form.taskType == "daren_care") {
+                return "店铺/达人链接";
             }
-            if (this.form.taskType == "ju_favorite") {
-                return "聚划算";
+            if (this.form.taskType == "tao_dianzan") {
+                return "微淘口令";
             }
             return "";
         },
@@ -180,3 +175,4 @@ export default {
     }
 };
 </script>
+

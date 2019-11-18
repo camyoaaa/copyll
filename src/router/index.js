@@ -66,6 +66,21 @@ const routes = [{
                         name: "deploy_taobao_favorite",
                         component: resolve => require(["../modules/deploy/mainContent/taobao/favorite"], resolve)
                     },
+                    {
+                        path: "cart",
+                        name: "deploy_taobao_cart",
+                        component: resolve => require(["../modules/deploy/mainContent/taobao/cart"], resolve)
+                    },
+                    {
+                        path: "live",
+                        name: "deploy_taobao_live",
+                        component: resolve => require(["../modules/deploy/mainContent/taobao/tlive"], resolve)
+                    },
+                    {
+                        path: "article",
+                        name: "deploy_taobao_article",
+                        component: resolve => require(["../modules/deploy/mainContent/taobao/article"], resolve)
+                    },
                 ]
 
 
