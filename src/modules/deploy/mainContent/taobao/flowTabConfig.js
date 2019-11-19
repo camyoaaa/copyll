@@ -1,20 +1,48 @@
 export default {
-    taskTypeList: [{
-            label: "APP流量",
-            value: "app_flow",
-            icon: "lion-shouji1"
-        },
-        {
-            label: "PC流量",
-            value: "pc_flow",
-            icon: "lion-pc"
-        },
-        {
-            label: "直访流量",
-            value: "visit_flow",
-            icon: "lion-lianjie"
-        }
-    ],
+    taskType: {
+        buttons: [{
+                label: "APP流量",
+                value: "app_flow",
+                icon: "lion-shouji1"
+            },
+            {
+                label: "PC流量",
+                value: "pc_flow",
+                icon: "lion-pc"
+            },
+            {
+                label: "直访流量",
+                value: "visit_flow",
+                icon: "lion-lianjie"
+            }
+        ],
+        tools: [{
+                name: "示例",
+                title: "查看任务示例",
+                icon: "lion-help",
+                click: () => {}
+            },
+            {
+                name: "重置",
+                title: "重置任务参数",
+                icon: "lion-chongzhi",
+                click: () => {}
+            },
+            {
+                name: "批量",
+                title: "批量发布任务",
+                icon: "lion-battch-plus",
+                click: () => {}
+            },
+            {
+                name: "另存",
+                title: "另存任务方案",
+                icon: "lion-save",
+                click: () => {}
+            }
+        ]
+    },
+    taskDatePicker: true,
     linkSearch: {
         show: true,
         type: {
@@ -24,9 +52,13 @@ export default {
         }
 
     },
-    scanTime: {
+    keywords: {
+        show: ['app_flow', 'pc_flow']
+
+    },
+    scanItem: {
         show: true,
-        options: {
+        timeOptions: {
             app_flow: [{
                     value: "30-100",
                     label: "30-100秒(免费)"
@@ -71,13 +103,6 @@ export default {
                 }
             ],
         }
-    },
-    scanDeep: {
-        show: true
-    },
-    keywords: {
-        show: ['app_flow', 'pc_flow']
-
     },
     remark: true
 }

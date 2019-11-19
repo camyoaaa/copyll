@@ -15,6 +15,7 @@ import "./plugins/ant-design-vue.js";
 import moment from "moment";
 import VueJsonp from "vue-jsonp";
 Vue.use(VueJsonp);
+window.Jsonp = Vue.jsonp;
 // Vue.use(ElementUI);
 Vue.config.productionTip = false;
 Vue.prototype.$log = window.console.log;

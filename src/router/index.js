@@ -53,35 +53,36 @@ const routes = [{
                 component: resolve => require(["../modules/deploy/mainContent/moban"], resolve)
             },
             {
-                path: "tb",
+                path: "tb/:category",
                 name: "deploy_taobao",
-                component: resolve => require(["../modules/deploy/mainContent/taobao"], resolve),
-                children: [{
-                        path: "flow",
-                        name: "deploy_taobao_flow",
-                        component: resolve => require(["../modules/deploy/mainContent/taobao/flow"], resolve)
-                    },
-                    {
-                        path: "favorite",
-                        name: "deploy_taobao_favorite",
-                        component: resolve => require(["../modules/deploy/mainContent/taobao/favorite"], resolve)
-                    },
-                    {
-                        path: "cart",
-                        name: "deploy_taobao_cart",
-                        component: resolve => require(["../modules/deploy/mainContent/taobao/cart"], resolve)
-                    },
-                    {
-                        path: "live",
-                        name: "deploy_taobao_live",
-                        component: resolve => require(["../modules/deploy/mainContent/taobao/tlive"], resolve)
-                    },
-                    {
-                        path: "article",
-                        name: "deploy_taobao_article",
-                        component: resolve => require(["../modules/deploy/mainContent/taobao/article"], resolve)
-                    },
-                ]
+                // component: resolve => require(["../modules/deploy/mainContent/taobao"], resolve),
+                component: resolve => require(["../modules/deploy/mainContent/taobao/newIndex"], resolve),
+                // children: [{
+                //         path: "flow",
+                //         name: "deploy_taobao_flow",
+                //         component: resolve => require(["../modules/deploy/mainContent/taobao/flow"], resolve)
+                //     },
+                //     {
+                //         path: "favorite",
+                //         name: "deploy_taobao_favorite",
+                //         component: resolve => require(["../modules/deploy/mainContent/taobao/favorite"], resolve)
+                //     },
+                //     {
+                //         path: "cart",
+                //         name: "deploy_taobao_cart",
+                //         component: resolve => require(["../modules/deploy/mainContent/taobao/cart"], resolve)
+                //     },
+                //     {
+                //         path: "live",
+                //         name: "deploy_taobao_live",
+                //         component: resolve => require(["../modules/deploy/mainContent/taobao/tlive"], resolve)
+                //     },
+                //     {
+                //         path: "article",
+                //         name: "deploy_taobao_article",
+                //         component: resolve => require(["../modules/deploy/mainContent/taobao/article"], resolve)
+                //     },
+                // ]
 
 
             },

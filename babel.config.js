@@ -1,22 +1,22 @@
 module.exports = {
-  "presets": [
-    "@vue/cli-plugin-babel/preset"
-  ],
-  "plugins": [
+  presets: ["@vue/cli-plugin-babel/preset"],
+  plugins: [
     [
       "component",
       {
-        "libraryName": "element-ui",
-        "styleLibraryName": "theme-chalk"
+        libraryName: "element-ui",
+        styleLibraryName: "theme-chalk"
       }
     ],
     [
       "import",
       {
-        "libraryName": "ant-design-vue",
-        "libraryDirectory": "es",
-        "style": true
+        libraryName: "ant-design-vue",
+        libraryDirectory: "es",
+        style: true
       }
-    ]
+    ],
+    "jsx-v-model",
+    "transform-vue-jsx"
   ]
-}
+};

@@ -12,7 +12,6 @@ export default {
     data() {
         return {
             tabList: [
-                //   { name: "直访流量", taskType: "visit" },
                 { name: "流量", taskType: "flow" },
                 { name: "收藏", taskType: "favorite" },
                 { name: "加购", taskType: "cart" },

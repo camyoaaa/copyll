@@ -1,82 +1,157 @@
 <template>
-  <div style="padding:0px 20px">
-    <task-types-tab :tab-list="tabList"></task-types-tab>
-    <el-form style="padding:20px 40px">
-      <el-form-item label="任务类型">
-        <!-- <types-btn-group :buttons="flowTypes"></types-btn-group> -->
-        <el-radio-group v-model="radio2" size="medium">
-          <el-radio-button label="上海"
-            ><i class="el-icon-search"></i> 上海</el-radio-button
-          >
-          <el-radio-button label="北京"></el-radio-button>
-          <el-radio-button label="广州"></el-radio-button>
-          <el-radio-button label="深圳"></el-radio-button>
-        </el-radio-group>
-      </el-form-item>
-    </el-form>
+  <div ng-controller="TbFlowCtrl" class="task-page scroll-full ng-scope">
+    <!-- 滚动区域开始 -->
+    <task-types-tab :tab-list="tabList" />
+    <render-content></render-content>
   </div>
 </template>
 
 <script>
-import taskTypesTab from "../commonComponents/typesTab";
-// import typesBtnGroup from "../commonComponents/typesBtnGroup";
-// import formTools from "../commonComponents/formTools";
-// import taskDatePicker from "../commonComponents/taskDatePicker";
-// import linkSearch from "../commonComponents/linkSearch";
-// import productShow from "../commonComponents/productShow";
-// import keywords from "../commonComponents/keywords";
-// import taskTimer from "../commonComponents/taskTimer";
-// import commonSelect from "../commonComponents/commonSelect";
-// import deployRow from "../commonComponents/deployRow";
+import flowTabConfig from "./flowTabConfig.js";
+import favoTabConfig from "./favoTabConfig.js";
+import cartTabConfig from "./cartTabConfig.js";
+import liveTabConfig from "./liveTabConfig.js";
+import artcTabConfig from "./artcTabConfig.js";
+
+const renderComponent = function(h, cTab, form, name, option) {
+  switch (name) {
+    case "taskType":
+      return (
+        <form-item label="任务类型">
+          <types-btn-group
+            buttons={option.buttons}
+            value={form.taskType}
+            onChange={type => {
+              form.taskType = type;
+            }}
+          />
+          <form-tools tools={option.tools}></form-tools>
+        </form-item>
+      );
+    case "taskDatePicker":
+      return (
+        <form-item label="任务日期">
+          <task-date-picker
+            value={form.daterange}
+            onChange={daterange => {
+              form.daterange = daterange;
+            }}
+          />
+        </form-item>
+      );
+    case "linkSearch":
+      return <href-form-item buttons={option} type={option.type[cTab]} />;
+    case "keywords":
+      return <keywords-form-item />;
+    case "scanItem":
+      return (
+        <double-form-item label1="浏览时间" label2="浏览深度">
+          <common-select
+            slot="item1"
+            value={form.scanTime}
+            onChange={scanTime => {
+              form.scanTime = scanTime;
+            }}
+            options={option.timeOptions[form.taskType]}
+            key={form.taskType}
+          ></common-select>
+          <scan-deep-select
+            slot="item2"
+            value={form.scanDeep}
+            onChange={scanDeep => {
+              form.scanDeep = scanDeep;
+            }}
+          ></scan-deep-select>
+        </double-form-item>
+      );
+    case "remark":
+      return (
+        <form-item label="任务备注">
+          <el-input
+            value={form.taskmark}
+            onChange={mark => {
+              form.taskmark = mark;
+            }}
+            size="small"
+            placeholder="任务备注（可不填）"
+          ></el-input>
+        </form-item>
+      );
+    default:
+      break;
+  }
+};
 
 export default {
-  components: {
-    taskTypesTab
-    // typesBtnGroup
-    // formTools,
-    // taskDatePicker,
-    // linkSearch,
-    // productShow,
-    // CollapseTransition,
-    // keywords,
-    // taskTimer,
-    // commonSelect,
-    // deployRow
-  },
   data() {
     return {
-      radio2: "",
       tabList: [
-        //   { name: "直访流量", taskType: "visit" },
         { name: "流量", taskType: "flow" },
         { name: "收藏", taskType: "favorite" },
         { name: "加购", taskType: "cart" },
         { name: "直播", taskType: "live" },
         { name: "文章", taskType: "article" }
       ],
-      flowTypes: [
-        {
-          label: "APP流量",
-          value: "app_flow",
-          icon: "lion-shouji1"
-        },
-        {
-          label: "PC流量",
-          value: "pc_flow",
-          icon: "lion-pc"
-        },
-        {
-          label: "直访流量",
-          value: "visit_flow",
-          icon: "lion-lianjie"
-        }
-        // {
-        // 	label: "投票",
-        // 	value: "visit_1212",
-        // 	icon:'lion-1212'
-        // }
-      ]
+      form: {
+        taskType: "",
+        daterange: "",
+        productInfo: {},
+        keywords: [],
+        scanTime: "",
+        scanDeep: "",
+        taskmark: "",
+        taskDaily: 100,
+        taskAlloc: [],
+        planType: ""
+      }
     };
+  },
+  components: {
+    renderContent: {
+      render(h) {
+        let currentTab = this.$parent.currentTab;
+        let form = this.$parent.form;
+        let config = {};
+        switch (currentTab) {
+          case "flow":
+            config = flowTabConfig;
+            break;
+          case "favorite":
+            config = favoTabConfig;
+            break;
+          case "cart":
+            config = cartTabConfig;
+            break;
+          case "live":
+            config = liveTabConfig;
+            break;
+          case "article":
+            config = artcTabConfig;
+            break;
+          default:
+            break;
+        }
+        let renderComponentArray = [];
+        for (let k in config) {
+          renderComponentArray.push(
+            renderComponent(h, currentTab, form, k, config[k])
+          );
+        }
+        return (
+          <div class="scroll-viewer">
+            <div class="tab-content mbn task-content">
+              <div class="form-horizontal">{renderComponentArray}</div>
+            </div>
+            <deploy-row form={form}></deploy-row>
+          </div>
+        );
+      }
+    }
+  },
+  computed: {
+    currentTab() {
+      return this.$route.params.category;
+    }
   }
 };
 </script>

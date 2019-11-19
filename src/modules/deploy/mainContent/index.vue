@@ -1,11 +1,11 @@
 <template>
-    <div id="page-wrapper" class="scroll-full" style="height:calc(100% - 65px)">
-        <!-- ngView:  -->
-        <div class="scroll-full ng-scope" ng-view="">
-            <router-view></router-view>
-        </div>
+  <div id="page-wrapper" class="scroll-full" style="height:calc(100% - 65px)">
+    <!-- ngView:  -->
+    <div class="scroll-full ng-scope" ng-view="">
+      <router-view></router-view>
     </div>
-    <!-- ngIf: !ispc -->
+  </div>
+  <!-- ngIf: !ispc -->
 </template>
 
 <script>
@@ -14,6 +14,7 @@ import taskTypesTab from "./commonComponents/typesTab";
 import formItem from "./commonComponents/formItem";
 import doubleFormItem from "./commonComponents/doubleFormItem";
 import keywordsFormItem from "./commonComponents/keywordsFormItem";
+import hrefFormItem from "./commonComponents/hrefFormItem";
 
 import typesBtnGroup from "./commonComponents/typesBtnGroup";
 import formTools from "./commonComponents/formTools";
@@ -35,6 +36,7 @@ Vue.component(taskTypesTab.name, taskTypesTab);
 Vue.component(formItem.name, formItem);
 Vue.component(doubleFormItem.name, doubleFormItem);
 Vue.component(keywordsFormItem.name, keywordsFormItem);
+Vue.component(hrefFormItem.name, hrefFormItem);
 
 Vue.component(typesBtnGroup.name, typesBtnGroup);
 Vue.component(formTools.name, formTools);
@@ -50,13 +52,13 @@ Vue.component(deployRow.name, deployRow);
 Vue.component(CollapseTransition.name, CollapseTransition);
 
 export default {
-    name: "mycontent"
+  name: "mycontent"
 };
 Vue.prototype.$fillArray = function(arr, value) {
-    for (let index = 0; index < arr.length; index++) {
-        arr[index] = value;
-    }
+  for (let index = 0; index < arr.length; index++) {
+    arr[index] = value;
+  }
 
-    return arr;
+  return arr;
 };
 </script>
