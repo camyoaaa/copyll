@@ -2,19 +2,14 @@ export default {
     taskType: {
         show: true,
         buttons: [{
-                label: "阅读次数",
-                value: "times_artc",
-                icon: "lion-guankan"
+                label: "店铺关注",
+                value: "shop_atte",
+                icon: "lion-dianpu-o"
             },
             {
-                label: "阅读人数",
-                value: "nums_artc",
-                icon: "lion-yonghu2"
-            },
-            {
-                label: "引导进店",
-                value: "guide_artc",
-                icon: "lion-woyeyaokaidian"
+                label: "达人关注",
+                value: "daren_atte",
+                icon: "lion-dianzan"
             }
         ],
         tools: [{
@@ -49,13 +44,12 @@ export default {
     linkSearch: {
         show: true,
         type: {
-            times_artc: 'taobao_article',
-            nums_artc: 'taobao_article',
-            guide_artc: 'taobao_article',
+            shop_atte: 'jingdong_shop',
+            daren_atte: 'jingdong_daren_shop'
         }
 
     },
-    taskDailyPro: {
+    taskDaily: {
         show: true
     },
     taskDuration: {

@@ -2,24 +2,14 @@ export default {
     taskType: {
         show: true,
         buttons: [{
-                label: "直播热度",
-                value: "hot_live",
-                icon: "lion-fire"
+                label: "搜索收藏",
+                value: "search_favo",
+                icon: "lion-sousuo"
             },
             {
-                label: "达人关注",
-                value: "daren_live",
-                icon: "lion-zhibo"
-            },
-            {
-                label: "直播观看",
-                value: "watch_live",
-                icon: "lion-guankan"
-            },
-            {
-                label: "微淘点赞",
-                value: "dianzan_live",
-                icon: "lion-dianzan"
+                label: "直接收藏",
+                value: "direct_favo",
+                icon: "lion-gouwudai"
             }
         ],
         tools: [{
@@ -48,27 +38,48 @@ export default {
             }
         ]
     },
-    liveTip: {
-        show: ['hot_live']
-    },
     taskDatePicker: {
         show: true
     },
     linkSearch: {
         show: true,
         type: {
-            hot_live: 'taobao_live',
-            daren_live: 'taobao_daren_shop',
-            watch_live: 'taobao_live',
-            dianzan_live: 'taobao_weitao'
+            search_favo: 'jingdong_product',
+            direct_favo: 'jingdong_product'
         }
 
     },
+    keywords: {
+        show: ['search_favo']
+
+    },
+    scanItem: {
+        show: ['search_favo'],
+        timeOptions: {
+            app_flow: [{
+                    value: "30-100",
+                    label: "30-100秒(免费)"
+                },
+                {
+                    value: "100-180",
+                    label: "100-180秒(+5积分)"
+                },
+                {
+                    value: "180-280",
+                    label: "180-280秒(+10积分)"
+                },
+                {
+                    value: "280-380",
+                    label: "280-280秒(+15积分)"
+                }
+            ]
+        }
+    },
     taskDaily: {
-        show: true
+        show: ['direct_favo']
     },
     taskDuration: {
-        show: true
+        show: ['direct_favo']
     },
     remark: {
         show: true

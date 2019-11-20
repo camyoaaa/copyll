@@ -32,7 +32,7 @@
 				<div>
 					<h2>近一周收益排行</h2>
 				</div>
-				<div ui-spinner="" ng-show="!drawRankList" class="ng-isolate-scope ng-hide" style=""><div class="loading-box"><div><div class="load-spinner"><div class="load-inner"><div class="bounce bounce1"></div><div class="bounce bounce2"></div><div class="bounce bounce3"></div></div><p class="mtm">加载中...</p></div></div></div></div>
+				<!-- <div ui-spinner="" ng-show="!drawRankList" class="ng-isolate-scope ng-hide" style=""><div class="loading-box"><div><div class="load-spinner"><div class="load-inner"><div class="bounce bounce1"></div><div class="bounce bounce2"></div><div class="bounce bounce3"></div></div><p class="mtm">加载中...</p></div></div></div></div> -->
 				<ul class="list-unstyled">
 					<!-- ngRepeat: item in drawRankList track by $index --><li class="clearfix ng-scope" ng-repeat="item in drawRankList track by $index">
 						<div class="pull-left ng-binding"><i class="rank-num ng-binding rank-top" ng-class="{'rank-top': $index < 3}">1</i>133****7668</div>
@@ -72,9 +72,12 @@
 			</div>
 		</div>
 		<div class="guaji-footer">
-			<div class="task-footer" style="position: fixed;">
+			<a-affix :offsetBottom="0" style="position:absolute;bottom:0px">
+				<div class="task-footer">
 				<a class="btn btn-lg btn-warning btn-square" ng-click="downloadClient();" href="javascript:void(0);"><i class="lion lion-xiazai"></i> 我要挂机赚钱</a>
 			</div>
+			</a-affix>
+			
 		</div>
 	</div>
 </div>

@@ -1,19 +1,4 @@
-<template>
-    <div ng-controller="TbFlowCtrl" class="task-page scroll-full ng-scope">
-        <!-- 滚动区域开始 -->
-        <task-types-tab :tab-list="tabList" />
-        <render-content></render-content>
-    </div>
-</template>
-
-<script>
-import flowTabConfig from "./flowTabConfig.js";
-import favoTabConfig from "./favoTabConfig.js";
-import cartTabConfig from "./cartTabConfig.js";
-import liveTabConfig from "./liveTabConfig.js";
-import artcTabConfig from "./artcTabConfig.js";
-
-const shouldRender = function(option, compareValue) {
+export const shouldRender = function(option, compareValue) {
     if (typeof option.show == "boolean" && option.show) {
         return true;
     }
@@ -26,7 +11,7 @@ const shouldRender = function(option, compareValue) {
     return false;
 };
 
-const renderComponent = function(h, cTab, form, name, option, config) {
+export const renderComponent = function(h, cTab, form, name, option, config) {
     if (!shouldRender(option, form.taskType)) return null;
     switch (name) {
         case "taskType":
@@ -67,12 +52,19 @@ const renderComponent = function(h, cTab, form, name, option, config) {
             return (
                 <form-item label="任务日期">
                     <task-date-picker
+                    style="width:300px"
                         value={form.daterange}
                         onChange={daterange => (form.daterange = daterange)}
                     />
                     <task-calc form={form} config={config} />
                 </form-item>
             );
+            case "taskName":
+                return (
+                    <form-item label="任务名称">
+                    <el-input size="small" style="width:300px" value={form.taskName} onChange={value =>form.taskName = value}/>
+                </form-item> 
+                )
         case "linkSearch0":
             return <href-form-item type={option.type[form.taskType]} />;
         case "linkSearch":
@@ -159,87 +151,3 @@ const renderComponent = function(h, cTab, form, name, option, config) {
             break;
     }
 };
-
-export default {
-    data() {
-        return {
-            tabList: [
-                { name: "流量", taskType: "flow" },
-                { name: "收藏", taskType: "favorite" },
-                { name: "加购", taskType: "cart" },
-                { name: "直播", taskType: "live" },
-                { name: "文章", taskType: "article" }
-            ],
-            form: {
-                taskType: "",
-                daterange: "",
-                productInfo: {},
-                keywords: [],
-                scanTime: "",
-                scanDeep: "",
-                taskmark: "",
-                taskDaily: 100,
-                taskAlloc: [],
-                planType: "",
-                scanGoodsNum: 1
-            }
-        };
-    },
-    components: {
-        renderContent: {
-            render(h) {
-                let currentTab = this.$parent.currentTab;
-                let form = this.$parent.form;
-                let config = {};
-                switch (currentTab) {
-                    case "flow":
-                        config = flowTabConfig;
-                        break;
-                    case "favorite":
-                        config = favoTabConfig;
-                        break;
-                    case "cart":
-                        config = cartTabConfig;
-                        break;
-                    case "live":
-                        config = liveTabConfig;
-                        break;
-                    case "article":
-                        config = artcTabConfig;
-                        break;
-                    default:
-                        break;
-                }
-                let renderComponentArray = [];
-                for (let k in config) {
-                    renderComponentArray.push(
-                        renderComponent(
-                            h,
-                            currentTab,
-                            form,
-                            k,
-                            config[k],
-                            config
-                        )
-                    );
-                }
-                return (
-                    <div class="scroll-viewer">
-                        <div class="tab-content mbn task-content">
-                            <div class="form-horizontal">
-                                {renderComponentArray}
-                            </div>
-                        </div>
-                        <deploy-row form={form} config={config}></deploy-row>
-                    </div>
-                );
-            }
-        }
-    },
-    computed: {
-        currentTab() {
-            return this.$route.params.category;
-        }
-    }
-};
-</script>

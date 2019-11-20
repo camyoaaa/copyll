@@ -2,19 +2,19 @@ export default {
     taskType: {
         show: true,
         buttons: [{
-                label: "APP流量",
-                value: "app_flow",
-                icon: "lion-shouji1"
+                label: "搜索收藏",
+                value: "search_favo",
+                icon: "lion-sousuo"
             },
             {
-                label: "PC流量",
-                value: "pc_flow",
-                icon: "lion-pc"
+                label: "直接收藏",
+                value: "direct_favo",
+                icon: "lion-gouwudai"
             },
             {
-                label: "直访流量",
-                value: "visit_flow",
-                icon: "lion-lianjie"
+                label: "店铺收藏",
+                value: "shop_favo",
+                icon: "lion-store"
             }
         ],
         tools: [{
@@ -49,18 +49,18 @@ export default {
     linkSearch: {
         show: true,
         type: {
-            app_flow: 'taobao_product',
-            pc_flow: 'taobao_product',
-            visit_flow: 'taobao_product_shop',
+            search_favo: 'pinduoduo_product',
+            direct_favo: 'pinduoduo_product',
+            shop_favo:"pinduoduo_shop"
         }
 
     },
     keywords: {
-        show: ['app_flow', 'pc_flow']
+        show: ['search_favo']
 
     },
     scanItem: {
-        show: true,
+        show: ['search_favo'],
         timeOptions: {
             app_flow: [{
                     value: "30-100",
@@ -68,50 +68,24 @@ export default {
                 },
                 {
                     value: "100-180",
-                    label: "100-180秒(+8积分)"
+                    label: "100-180秒(+5积分)"
                 },
                 {
                     value: "180-280",
-                    label: "180-280秒(+13积分)"
+                    label: "180-280秒(+10积分)"
                 },
                 {
                     value: "280-380",
-                    label: "280-280秒(+18积分)"
+                    label: "280-280秒(+15积分)"
                 }
-            ],
-            pc_flow: [{
-                    value: "30-50",
-                    label: "30-50秒(免费)"
-                },
-                {
-                    value: "50-90",
-                    label: "50-90秒(+5积分)"
-                },
-                {
-                    value: "90-130",
-                    label: "90-130秒(+10积分)"
-                }
-            ],
-            visit_flow: [{
-                    value: "30-50",
-                    label: "30-50秒(免费)"
-                },
-                {
-                    value: "50-90",
-                    label: "50-90秒(+5积分)"
-                },
-                {
-                    value: "90-130",
-                    label: "90-130秒(+10积分)"
-                }
-            ],
+            ]
         }
     },
     taskDaily: {
-        show: ['visit_flow']
+        show: ['direct_favo','shop_favo']
     },
     taskDuration: {
-        show: ['visit_flow']
+        show: ['direct_favo','shop_favo']
     },
     remark: {
         show: true

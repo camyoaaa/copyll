@@ -1,5 +1,5 @@
 <template>
-    <bottom-affix :offsetBottom="0" style="position:absolute;bottom:0px">
+    <a-affix :offsetBottom="0" style="position:absolute;bottom:0px">
         <div class="task-footer ui-border-t clearfix ng-scope">
             <div class="pull-left ng-scope">
                 <ul class="list-unstyled clearfix mbn">
@@ -24,18 +24,30 @@
                 </button>
             </div>
         </div>
-    </bottom-affix>
+    </a-affix>
 </template>
 
 <script>
-import { Affix } from "ant-design-vue";
+const shouldRender = function(option, compareValue) {
+    if (typeof option.show == "boolean" && option.show) {
+        return true;
+    }
+    if (typeof option.show == "string" && option.show) {
+        return compareValue == option.show;
+    }
+    if (Array.isArray(option.show)) {
+        return option.show.includes(compareValue);
+    }
+    return false;
+};
 export default {
     name: "deployRow",
-    components: {
-        bottomAffix: Affix
-    },
     props: {
         form: {
+            type: Object,
+            default: () => ({})
+        },
+        config: {
             type: Object,
             default: () => ({})
         }
@@ -48,14 +60,23 @@ export default {
             return end.diff(start, "days") + 1;
         },
         taskDaily() {
-            //每日任务量
-            if (this.form.keywords.length == 0) {
-                return 0;
-            } else {
-                return this.form.keywords
-                    .map(k => k.num)
-                    .reduce((a, b) => a + b);
+            let taskDaily = 0;
+            if (shouldRender(this.config.keywords || {}, this.form.taskType)) {
+                if (Array.isArray(this.form.keywords)) {
+                    let length = this.form.keywords;
+                    taskDaily =
+                        length == 0
+                            ? 0
+                            : this.form.keywords
+                                  .map(k => k.num)
+                                  .reduce((a, b) => a + b);
+                }
+            } else if (
+                shouldRender(this.config.taskDaily || {}, this.form.taskType)
+            ) {
+                taskDaily = this.form.taskDaily || 0;
             }
+            return taskDaily;
         },
         price() {
             return 7;

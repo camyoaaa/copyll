@@ -81,17 +81,16 @@
         <li
           v-for="(menu, index) in menuList"
           :key="index"
-          :class="{ active: menu.routeName == $route.name }"
+          :class="{ active:  $route.name.indexOf(menu.routeName) > -1 }"
         >
           <a @click="gotoMenu(menu.routeName)" class="cursor-pointer">
             <i
               class="lion"
               :class="
-                menu.routeName == $route.name
+                $route.name.indexOf(menu.routeName) > -1
                   ? menu.activeIcon
                   : menu.silenceIcon
               "
-              ng-class="{&#39;lion-tb&#39;: path === &#39;tb&#39;, &#39;lion-tb-o&#39;: path !== &#39;tb&#39;}"
             ></i>
             <span>{{ menu.name }}</span>
           </a>
@@ -176,8 +175,11 @@ export default {
   },
   methods: {
     gotoMenu(routeName) {
-      this.$log(routeName);
-      this.$router.push({ name: routeName, params: { taskType: "flow" } });
+      if(routeName == 'deploy_chaxun'){
+        this.$router.push({ name: 'deploy_chaxun_task'});
+        return;
+      }
+      this.$router.push({ name: routeName, params: { category: "flow" } });
     }
   }
 };

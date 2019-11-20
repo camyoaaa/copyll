@@ -2,19 +2,28 @@ export default {
     taskType: {
         show: true,
         buttons: [{
-                label: "阅读次数",
-                value: "times_artc",
+                label: "抖音粉丝",
+                value: "fans_flow",
+                icon: "lion-shoucang"
+            },
+            {
+                label: "抖音点赞",
+                value: "dianzan_flow",
+                icon: "lion-dianzan"
+            },
+            {
+                label: "抖音播放",
+                value: "play_flow",
                 icon: "lion-guankan"
             },
             {
-                label: "阅读人数",
-                value: "nums_artc",
-                icon: "lion-yonghu2"
-            },
-            {
-                label: "引导进店",
-                value: "guide_artc",
-                icon: "lion-woyeyaokaidian"
+                label: "抖音分享",
+                value: "share_flow",
+                icon: "lion-tuiguang"
+            },{
+                label: "抖音评论",
+                value: "comment_flow",
+                icon: "lion-comment"
             }
         ],
         tools: [{
@@ -49,14 +58,16 @@ export default {
     linkSearch: {
         show: true,
         type: {
-            times_artc: 'taobao_article',
-            nums_artc: 'taobao_article',
-            guide_artc: 'taobao_article',
+            fans_flow: 'douyin_movie',
+            dianzan_flow: 'douyin_movie',
+            play_flow: 'douyin_movie',
+            share_flow: 'douyin_movie',
+            comment_flow: 'douyin_movie'
         }
 
     },
-    taskDailyPro: {
-        show: true
+    taskDaily: {
+        show:true
     },
     taskDuration: {
         show: true

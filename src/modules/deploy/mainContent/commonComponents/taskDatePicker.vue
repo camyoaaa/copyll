@@ -1,18 +1,18 @@
 <template>
-  <range-picker
+  <a-range-picker
     :ranges="shortcuts"
     :disabledDate="disabledDate"
     :defaultValue="defaultRange"
     @change="rangechange"
-  ></range-picker>
+  ></a-range-picker>
 </template>
 
 <script>
-import { DatePicker } from "ant-design-vue";
+// import { DatePicker } from "ant-design-vue";
 
 export default {
   name: "taskDatePicker",
-  components: { RangePicker: DatePicker.RangePicker },
+  // components: { RangePicker: DatePicker.RangePicker },
   model: {
     prop: "daterange",
     event: "change"

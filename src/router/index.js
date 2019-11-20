@@ -45,7 +45,14 @@ const routes = [{
             {
                 path: "search",
                 name: "deploy_chaxun",
-                component: resolve => require(["../modules/deploy/mainContent/chaxun"], resolve)
+                component: resolve => require(["../modules/deploy/mainContent/chaxun"], resolve),
+                children:[
+                    {
+                        path: "task",
+                        name: "deploy_chaxun_task",
+                        component: resolve => require(["../modules/deploy/mainContent/chaxun/taskTable.vue"], resolve)
+                    },
+                ]
             },
             {
                 path: "template",
@@ -88,17 +95,17 @@ const routes = [{
             },
 
             {
-                path: "jd/:taskType",
+                path: "jd/:category",
                 name: "deploy_jingdong",
                 component: resolve => require(["../modules/deploy/mainContent/jingdong"], resolve)
             },
             {
-                path: "pdd/:taskType",
+                path: "pdd/:category",
                 name: "deploy_pinduoduo",
                 component: resolve => require(["../modules/deploy/mainContent/pinduoduo"], resolve)
             },
             {
-                path: "dy/:taskType",
+                path: "dy/:category",
                 name: "deploy_douyin",
                 component: resolve => require(["../modules/deploy/mainContent/douyin"], resolve)
             },

@@ -2,19 +2,9 @@ export default {
     taskType: {
         show: true,
         buttons: [{
-                label: "阅读次数",
-                value: "times_artc",
-                icon: "lion-guankan"
-            },
-            {
-                label: "阅读人数",
-                value: "nums_artc",
-                icon: "lion-yonghu2"
-            },
-            {
-                label: "引导进店",
-                value: "guide_artc",
-                icon: "lion-woyeyaokaidian"
+                label: "APP流量",
+                value: "app_flow",
+                icon: "lion-shouji1"
             }
         ],
         tools: [{
@@ -46,20 +36,38 @@ export default {
     taskDatePicker: {
         show: true
     },
+    taskName:{
+        show:true
+    },
     linkSearch: {
         show: true,
         type: {
-            times_artc: 'taobao_article',
-            nums_artc: 'taobao_article',
-            guide_artc: 'taobao_article',
+            app_flow: 'pinduoduo_product',
         }
 
     },
-    taskDailyPro: {
-        show: true
+    keywords: {
+        show: ['app_flow']
+
     },
-    taskDuration: {
-        show: true
+    scanItem: {
+        show: true,
+        timeOptions: {
+            app_flow: [
+                {
+                    value: "100-180",
+                    label: "100-180秒(免费)"
+                },
+                {
+                    value: "180-280",
+                    label: "180-280秒(+5积分)"
+                },
+                {
+                    value: "280-380",
+                    label: "280-280秒(+10积分)"
+                }
+            ]
+        }
     },
     remark: {
         show: true

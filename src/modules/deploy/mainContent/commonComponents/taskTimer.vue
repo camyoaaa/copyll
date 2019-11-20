@@ -190,8 +190,10 @@ export default {
         }
     },
     watch: {
-        totalAlloc() {
-            // this.initAllocData();
+        totalAlloc(newValue, oldValue) {
+            if (newValue < oldValue) {
+                this.initAllocData();
+            }
         },
         allocPlan: {
             immediate: true,

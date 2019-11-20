@@ -2,19 +2,19 @@ export default {
     taskType: {
         show: true,
         buttons: [{
-                label: "阅读次数",
-                value: "times_artc",
-                icon: "lion-guankan"
+                label: "搜索加购",
+                value: "search_cart",
+                icon: "lion-sousuo"
             },
             {
-                label: "阅读人数",
-                value: "nums_artc",
-                icon: "lion-yonghu2"
+                label: "直接加购",
+                value: "direct_cart",
+                icon: "lion-gouwuche"
             },
             {
-                label: "引导进店",
-                value: "guide_artc",
-                icon: "lion-woyeyaokaidian"
+                label: "预约抢购",
+                value: "promise_cart",
+                icon: "lion-clock"
             }
         ],
         tools: [{
@@ -49,17 +49,31 @@ export default {
     linkSearch: {
         show: true,
         type: {
-            times_artc: 'taobao_article',
-            nums_artc: 'taobao_article',
-            guide_artc: 'taobao_article',
+            search_cart: 'jingdong_product',
+            direct_cart: 'jingdong_product',
+            promise_cart: 'jingdong_product',
         }
 
     },
-    taskDailyPro: {
-        show: true
+    keywords: {
+        show: ['search_cart']
+
+    },
+    scanItem: {
+        show: ['search_cart'],
+        timeOptions: {
+            search_cart: [{
+                    value: "30-30",
+                    label: "30-30秒(免费)"
+                }
+            ],
+        }
+    },
+    taskDaily: {
+        show: ['direct_cart', 'promise_cart']
     },
     taskDuration: {
-        show: true
+        show: ['direct_cart', 'promise_cart']
     },
     remark: {
         show: true

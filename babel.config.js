@@ -15,8 +15,6 @@ module.exports = {
         libraryDirectory: "es",
         style: true
       }
-    ],
-    "jsx-v-model",
-    "transform-vue-jsx"
+    ]
   ]
 };

@@ -96,7 +96,13 @@ const placeholderMap = {
   taobao_live: "输入淘宝直播间分享的淘口令",
   taobao_daren_shop: "输入店铺或达人链接",
   taobao_weitao: "输入微淘分享的淘口令",
-  taobao_article: "输入文章链接或文章微淘口令"
+  taobao_article: "输入文章链接或文章微淘口令",
+  jingdong_product:"输入商品链接",
+  jingdong_shop:"输入京东店铺链接",
+  jingdong_daren_shop:"输入京东店铺/达人链接",
+  pinduoduo_product:"输入商品链接",
+  pinduoduo_shop:"输入拼多多店铺链接",
+    douyin_movie:"输入抖音链接"
 };
 const labelMap = {
   taobao_product: "商品链接",
@@ -106,7 +112,13 @@ const labelMap = {
   taobao_live: "直播口令",
   taobao_daren_shop: "店铺/达人链接",
   taobao_weitao: "微淘口令",
-  taobao_article: "文章链接"
+  taobao_article: "文章链接",
+  jingdong_product: "商品链接",
+  jingdong_shop:"店铺链接",
+  jingdong_daren_shop:"店铺/达人链接",
+  pinduoduo_product:"商品链接",
+  pinduoduo_shop:"店铺链接",
+  douyin_movie:"抖音链接"
 };
 export default {
   name: "hrefFormItem",

@@ -1,6 +1,7 @@
 import Vue from "vue";
 // import ElementUI from 'element-ui';
 import './elementImport.js';
+import './antvueImport.js';
 import App from "./App.vue";
 import router from "./router";
 import "./assests/lieliu_files/awesome.min.css";
