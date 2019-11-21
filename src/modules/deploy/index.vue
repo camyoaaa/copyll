@@ -1,24 +1,24 @@
 <template>
-  <div>
-    <!-- 加载图标开始 -->
+    <div>
+        <!-- 加载图标开始 -->
 
-    <div id="wrapper">
-      <top-header />
-      <!-- 主内容区开始 -->
-      <div class="page-container" style="height:100%">
-        <sider-bar />
-        <!-- 页面切换内容区 -->
-        <mainContent />
-      </div>
-      <!-- 遮罩层 -->
-      <div id="wrapperCover"></div>
-    </div>
-    <!-- ngIf: !!ispc -->
-    <div class="page-footer ng-scope">
-      <pageFooter />
-    </div>
-    <!-- end ngIf: !!ispc -->
-    <!-- <script src="./lieliu_files/jquery-1.8.0.min.js"></script>
+        <div id="wrapper">
+            <top-header />
+            <!-- 主内容区开始 -->
+            <div class="page-container" style="height:100%">
+                <sider-bar />
+                <!-- 页面切换内容区 -->
+                <mainContent />
+            </div>
+            <!-- 遮罩层 -->
+            <div id="wrapperCover"></div>
+        </div>
+        <!-- ngIf: !!ispc -->
+        <div class="page-footer ng-scope">
+            <pageFooter />
+        </div>
+        <!-- end ngIf: !!ispc -->
+        <!-- <script src="./lieliu_files/jquery-1.8.0.min.js"></script>
 <script src="./lieliu_files/fly-zomm-img.min.js"></script>
 <script src="./lieliu_files/fengs.3.0.js"></script>
 <script src="./lieliu_files/angular.min.js"></script>
@@ -77,82 +77,83 @@ Fengs.config({'name': 'js', 'path': '/', 'remote': {'api': ['/'], 'js': ["https:
 	</script>
 -->
 
-    <input
-      id="textAngular-editableFix-010203040506070809"
-      style="width:1px;height:1px;border:none;margin:0;padding:0;position:absolute; top: -10000; left: -10000;"
-      unselectable="on"
-      tabindex="-1"
-    />
-  </div>
+        <input id="textAngular-editableFix-010203040506070809" style="width:1px;height:1px;border:none;margin:0;padding:0;position:absolute; top: -10000; left: -10000;" unselectable="on" tabindex="-1" />
+    </div>
 </template>
 
 <script>
+import "./assests/lieliu_files/awesome.min.css";
+import "./assests/lieliu_files/bootstrap.css";
+import "./assests/lieliu_files/font_250416_xrr6wv8ab8.css";
+import "element-ui/lib/theme-chalk/index.css";
+import "./assests/lieliu_files/app.css";
+
 import topHeader from "./topHeader";
 import siderBar from "./siderBar";
 import mainContent from "./mainContent";
 import pageFooter from "./pageFooter";
 
 export default {
-  components: { topHeader, siderBar, mainContent, pageFooter },
-  data() {
-    return {
-      ispc: true,
-      isie: false
-    };
-  },
-  created() {
-    //判断终端用户类型
-    let agent = window.navigator.userAgent; //UA
-    let deviceReg = /(Android|iPhone|SymbianOS|Windows Phone|iPad|iPod)/i;
-    this.ispc = agent.match(deviceReg) === null; //判断移动端
-    this.isie = agent.match(/(msie)/i) !== null; //判断IE
-    this.$log("是否是ie浏览器", this.ispc);
-  }
+    components: { topHeader, siderBar, mainContent, pageFooter },
+    data() {
+        return {
+            ispc: true,
+            isie: false
+        };
+    },
+    created() {
+        //判断终端用户类型
+        let agent = window.navigator.userAgent; //UA
+        let deviceReg = /(Android|iPhone|SymbianOS|Windows Phone|iPad|iPod)/i;
+        this.ispc = agent.match(deviceReg) === null; //判断移动端
+        this.isie = agent.match(/(msie)/i) !== null; //判断IE
+        this.$log("是否是ie浏览器", this.ispc);
+    }
 };
 </script>
 <style>
 body {
-  font-size: 13px;
+    font-size: 13px;
 }
 #wrapper {
-  /* min-height: calc(100% - 65px); */
+    /* min-height: calc(100% - 65px); */
 }
 .cursor-pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 a {
-  color: #777777;
+    color: #777777;
 }
 a {
-  color: #777777;
-  text-decoration: none;
+    color: #777777;
+    text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #ff6600;
-  text-decoration: none;
+    color: #ff6600;
+    text-decoration: none;
 }
 a:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
+    outline: thin dotted #333;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
 }
 .ant-input {
-  border-radius: 0px;
+    border-radius: 0px;
 }
 .el-input {
-  border-radius: 0px;
+    border-radius: 0px;
 }
 .el-input-group__append,
 .el-input-group__prepend,
 .el-input__inner {
-  border-radius: 0px !important;
+    border-radius: 0px !important;
 }
 .el-button--default {
-  background-color: #eee;
+    background-color: #eee;
 }
 .el-button--default:hover {
-  background-color: #dbdbdb;
-  border-color: #c6c6c6;
+    background-color: #dbdbdb;
+    border-color: #c6c6c6;
 }
 </style>

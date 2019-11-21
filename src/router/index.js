@@ -4,6 +4,15 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [{
+        path: '/home',
+        component: resolve => require(["../modules/home"], resolve)
+    },
+    // {
+    //     path: '/home',
+    //     name: 'home',
+    //     redirect: '/'
+    // },
+    {
         path: "/login",
         name: "login",
         component: resolve => require(["../modules/login"], resolve)
@@ -46,13 +55,11 @@ const routes = [{
                 path: "search",
                 name: "deploy_chaxun",
                 component: resolve => require(["../modules/deploy/mainContent/chaxun"], resolve),
-                children:[
-                    {
-                        path: "task",
-                        name: "deploy_chaxun_task",
-                        component: resolve => require(["../modules/deploy/mainContent/chaxun/taskTable.vue"], resolve)
-                    },
-                ]
+                children: [{
+                    path: "task",
+                    name: "deploy_chaxun_task",
+                    component: resolve => require(["../modules/deploy/mainContent/chaxun/taskTable.vue"], resolve)
+                }, ]
             },
             {
                 path: "template",
